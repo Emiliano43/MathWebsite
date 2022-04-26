@@ -44,12 +44,13 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li><a href="/blog">Статьи</a></li>
-                <li><a href="/blog/editor">Добавить свою</a></li>
+                <li><a href="/home">Главная</a></li>
+                <li><a href="/feedback">Отзывы</a></li>
+                <li><a href="/feedback/editor">Добавить свой отзыв</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="active">
-                    <a href="/blog/login"><span class="glyphicon glyphicon-log-in"></span> Залогироваться</a>
+                    <a href="/login"><span class="glyphicon glyphicon-log-in"></span>  Войти в режим админа</a>
                 </li>
             </ul>
         </div>
@@ -60,7 +61,7 @@
     <div class="row content">
         <div class="col-sm-4 text-left">
 
-            <form th:action="@{/blog/login}" method="post">
+            <form th:action="@{/login}" method="post">
                 <fieldset>
                     <h2>Введите данные</h2>
                     <div th:if="${param.error}">

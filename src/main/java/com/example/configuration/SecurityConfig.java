@@ -12,14 +12,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity config) throws Exception {
         config
                 .authorizeRequests()
-                .antMatchers("/blog").permitAll()
-                .antMatchers("/blog/img").permitAll()
-                .antMatchers("/blog/editor").hasRole("EDITOR")
-                .antMatchers("/blog/editor/delete").hasRole("EDITOR")
+                .antMatchers("/home").permitAll()
+                .antMatchers("/feedback").permitAll()
+                .antMatchers("/feedback/editor").hasRole("EDITOR")
+                .antMatchers("/feedback/editor/delete").hasRole("EDITOR")
                 .and()
-                .formLogin().loginPage("/blog/login").defaultSuccessUrl("/blog/editor").permitAll()
+                .formLogin().loginPage("/login").defaultSuccessUrl("/feedback/editor").permitAll()
                 .and()
-                .logout().logoutUrl("/blog/logout").permitAll();
+                .logout().logoutUrl("/logout").permitAll();
     }
 
     @Autowired

@@ -4,39 +4,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.example.model.Article;
-import com.example.service.ArticleService;
-
-import javax.persistence.criteria.CriteriaBuilder;
+import com.example.model.Review;
+import com.example.service.ReviewService;
 
 @Controller
-@RequestMapping("/blog")
+@RequestMapping("/")
 public class MainController {
 
     @Autowired
-    private ArticleService service;
+    private ReviewService service;
 
-    @RequestMapping
-    public String mainPage(Model model) {
-        model.addAttribute("articles", service.getAll());
-        return "main";
+    @RequestMapping(value = "/home")
+    public String homePage(Model model) {
+        return "home";
     }
 
-    @RequestMapping(value = "/editor")
+    @RequestMapping(value = "/feedback")
+    public String reviewsPage(Model model) {
+        model.addAttribute("reviews", service.getAll());
+        return "reviews";
+    }
+
+    @RequestMapping(value = "/feedback/editor")
     public String editorPage(Model model) {
-        model.addAttribute("article", new Article());
+        model.addAttribute("review", new Review());
         return "editor";
     }
 
-    @RequestMapping(value = "/editor/submit", method = RequestMethod.POST)
-    public String submitArticle(@ModelAttribute Article article) {
-        service.save(article);
+    @RequestMapping(value = "/feedback/editor/submit", method = RequestMethod.POST)
+    public String submitReview(@ModelAttribute Review review) {
+        service.save(review);
         return "redirect:../";
     }
 
-    @RequestMapping(value = "/delete/{articleId}")
-    public String deteleArticle(@PathVariable("articleId") Integer articleId) {
-        service.deleteById(articleId);
+    @RequestMapping(value = "/feedback/delete/{reviewId}")
+    public String deteleReview(@PathVariable("reviewId") Integer reviewId) {
+        service.deleteById(reviewId);
         return "redirect:../";
     }
 

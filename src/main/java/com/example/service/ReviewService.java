@@ -1,11 +1,9 @@
 package com.example.service;
 
+import com.example.model.Review;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
-import com.example.dao.ArticleRepository;
-import com.example.model.Article;
+import com.example.dao.ReviewRepository;
 
 import java.util.Comparator;
 import java.util.List;
@@ -15,16 +13,16 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
-public class ArticleService {
+public class ReviewService {
 
     @Autowired
-    private ArticleRepository repository;
+    private ReviewRepository repository;
 
-    public void save(Article article) {
-        repository.save(article);
+    public void save(Review review) {
+        repository.save(review);
     }
 
-    public List<Article> getAll() {
+    public List<Review> getAll() {
         return StreamSupport
                 .stream(Spliterators.spliteratorUnknownSize(repository.findAll().iterator(), Spliterator.NONNULL),
                         false)

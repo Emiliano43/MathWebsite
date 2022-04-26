@@ -28,7 +28,7 @@
             }
         }
     </style>
-    <title>Заглавная страница блога</title>
+    <title> Отзывы о сайте</title>
 </head>
 <body>
 
@@ -44,11 +44,12 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/blog">Статьи</a></li>
-                <li><a href="/blog/editor">Добавить свою</a></li>
+                <li><a href="/home">Главная</a></li>
+                <li class="active"><a href="/feedback">Отзывы</a></li>
+                <li><a href="/feedback/editor">Добавить свой отзыв</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/blog/login"><span class="glyphicon glyphicon-log-in"></span> Залогироваться</a></li>
+                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>  Войти в режим админа</a></li>
             </ul>
         </div>
     </div>
@@ -60,19 +61,15 @@
             <div>
                 <div class="well">
                     <div class="panel-body">
-                        <h1>Добро пожаловать</h1>
-                        <p>
-                            Этот сайт является демо версией возможностей <b>framework'а Spring</b><br/>
-                            C исходным кодом можете ознакомиться <a href="https://github.com/izebit/spring-web-demo">здесь</a>
-                        </p>
+                        <h1>Ваши отзывы и пожелания:</h1>
                     </div>
                 </div>
             </div>
 
-            <div th:each="article : ${articles}">
-                <h3 th:text="${article.title}"/>
-                <p th:text="${article.content}"/>
-                <a th:href="@{/blog/delete/} + ${article.id}">
+            <div th:each="review : ${reviews}">
+                <h3 th:text="${review.title}"/>
+                <p th:text="${review.content}"/>
+                <a th:href="@{/feedback/delete/} + ${review.id}">
                     <img border="0" src="/images/remove-icon.png" width="30" height="30"/>
                 </a>
                 <hr/>

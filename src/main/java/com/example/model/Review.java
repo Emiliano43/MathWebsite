@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class Article implements Serializable, Comparable<Article> {
+public class Review implements Serializable, Comparable<Review> {
 
     @Id
     @GeneratedValue
@@ -17,12 +17,12 @@ public class Article implements Serializable, Comparable<Article> {
     @Column
     private long creationTimestamp;
 
-    public Article() {
+    public Review() {
         this.creationTimestamp = System.currentTimeMillis();
     }
 
     @Override
-    public int compareTo(Article that) {
+    public int compareTo(Review that) {
         return Long.compare(this.creationTimestamp, that.creationTimestamp);
     }
 
