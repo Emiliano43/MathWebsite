@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import com.example.model.Article;
 import com.example.service.ArticleService;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 @Controller
 @RequestMapping("/blog")
 public class MainController {
@@ -32,10 +34,10 @@ public class MainController {
         return "redirect:../";
     }
 
-    @RequestMapping(value = "/editor/delete/{articleId}")
+    @RequestMapping(value = "/delete/{articleId}")
     public String deteleArticle(@PathVariable("articleId") Integer articleId) {
         service.deleteById(articleId);
-        return "main";
+        return "redirect:../";
     }
 
     @RequestMapping(value = "/login")
