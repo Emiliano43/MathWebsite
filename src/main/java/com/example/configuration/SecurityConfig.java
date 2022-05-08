@@ -11,20 +11,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity config) throws Exception {
         config
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/home").permitAll()
                 .antMatchers("/feedback").permitAll()
-                .antMatchers("/feedback/editor").hasRole("EDITOR")
-                .antMatchers("/feedback/editor/delete").hasRole("EDITOR")
+                .antMatchers("/feedback/editor").hasRole("ADMIN")
+                .antMatchers("/feedback/editor/delete").hasRole("ADMIN")
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .and()
-                .formLogin().loginPage("/login").defaultSuccessUrl("/feedback/editor").permitAll()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/home", true)
+                .permitAll()
                 .and()
-                .logout().logoutUrl("/logout").permitAll();
+                .logout()
+                .permitAll()
+                .logoutSuccessUrl("/");
     }
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder builder) throws Exception {
+    public void configureAdmin(AuthenticationManagerBuilder builder) throws Exception {
         builder.inMemoryAuthentication()
-                .withUser("user").password("{noop}password").roles("EDITOR");
+                .withUser("admin").password("{noop}admin").roles("ADMIN");
     }
 }

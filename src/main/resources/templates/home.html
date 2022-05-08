@@ -4,30 +4,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/assets/css/style.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style>
-        .navbar {
-            margin-bottom: 0;
-            border-radius: 0;
-        }
 
-        .row.content {
-            height: 450px
-        }
-
-        footer {
-            background-color: #555;
-            color: white;
-            padding: 15px;
-        }
-
-        @media screen and (max-width: 767px) {
-            .row.content {
-                height: auto;
-            }
-        }
-    </style>
     <title> Главная</title>
 </head>
 <body>
@@ -49,7 +29,9 @@
                 <li><a href="/feedback/editor">Добавить свой отзыв</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>  Войти в режим админа</a></li>
+                <li><a href="/profile"> Профиль</a></li>
+                <li><a href="/registration"> Регистрация</a></li>
+                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Войти</a></li>
             </ul>
         </div>
     </div>
@@ -58,19 +40,70 @@
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-sm-8 text-left">
+
             <div>
                 <div class="well">
                     <div class="panel-body">
                         <h1>Добро пожаловать!</h1>
                         <p>
-                            Этот сайт был написан мной в качестве <b>дипломной работы</b> при помощи framework'а Spring<br/>
+                            Этот сайт был написан мной в качестве <b>дипломной работы</b> при помощи framework'а
+                            Spring<br/>
                             C другими моими работами можно ознакомиться на моем <a href="https://github.com/Emiliano43">GitHub</a>
                         </p>
+
+                        <div class="content-wrapper">
+
+                            <div class="content">
+                                <h3>Решение систем дифференциальных уравнений</h3>
+                                <form>
+                                    <div class="equation-header"><b> Первое уравнение системы:</b></div>
+                                    <div class="equation"><input type="text" value="x' = x -1" maxlength="50"></div>
+
+                                    <div class="equation-header"><b> Второе уравнение системы:</b></div>
+                                    <div class="equation"><input type="text" value="y' = x + 2y - 3" maxlength="50"></div>
+
+                                    <div style="display: none" class="equation-header"><b> Третье уравнение системы:</b></div>
+                                    <div class="equation" style="display: none"><input type="text" maxlength="50"></div>
+
+                                    <div style="display: none" class="equation-header"><b> Четвертое уравнение системы:</b></div>
+                                    <div class="equation" style="display: none"><input type="text" maxlength="50"></div>
+
+                                    <p align="center">
+                                        <input type="submit" value="Решить систему уравнений!">
+                                    </p>
+                                </form>
+                            </div>
+
+                            <div class="reference-menu-container">
+                                <div class="reference-menu">
+                                    <h3>Теоретическая справка</h3>
+                                    <ul>
+                                        <li>
+                                            <a>Что такое дифференциальное уравнение?</a>
+                                        </li>
+                                        <li>
+                                            <a>Что такое система уравнений?</a>
+                                        </li>
+                                        <li>
+                                            <a>Что такое производная функции?</a>
+                                        </li>
+                                        <li>
+                                            <a>Методы решения дифференциальных уравнений</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
+
         </div>
+
     </div>
 </div>
+
 </body>
 </html>

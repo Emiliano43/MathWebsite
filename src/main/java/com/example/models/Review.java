@@ -1,9 +1,10 @@
-package com.example.model;
+package com.example.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name="REVIEW")
 public class Review implements Serializable, Comparable<Review> {
 
     @Id

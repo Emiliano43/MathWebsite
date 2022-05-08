@@ -1,6 +1,6 @@
 package com.example.dao;
 
-import com.example.model.Review;
+import com.example.models.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

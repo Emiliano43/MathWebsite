@@ -1,6 +1,6 @@
-package com.example.service;
+package com.example.services;
 
-import com.example.model.Review;
+import com.example.models.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.dao.ReviewRepository;
