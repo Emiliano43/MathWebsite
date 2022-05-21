@@ -24,13 +24,12 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/home">Главная</a></li>
-                <li><a href="/feedback">Отзывы</a></li>
-                <li><a href="/feedback/editor">Добавить свой отзыв</a></li>
+                <li><a href="/admin/home">Главная</a></li>
+                <li><a href="/admin/feedback">Отзывы</a></li>
+                <li><a href="/admin/feedback/editor">Добавить свой отзыв</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/registration"> Регистрация</a></li>
-                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Войти</a></li>
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Выйти</a></li>
             </ul>
         </div>
     </div>
@@ -47,39 +46,34 @@
                         <p>
                             Этот сайт был написан мной в качестве <b>дипломной работы</b> при помощи framework'а
                             Spring<br/>
-                            C другими моими работами можно ознакомиться на моем <a href="https://github.com/Emiliano43">GitHub</a>.<br/>
-                            Этот сайт решает системы обыкновенных дифферениальных уравнений вида:
-                        <p><img src="images/system.png" alt="Система уравнений"></p>
-                            Решением этой системы будут m функций. Вам будут представлены графики этих функций и таблица<br/>
-                        из точек, по которым они строились.
-                            У вас будет возможность сохранить массив этих точек для MATLAB и языка Python (файл .txt). Также вы сможете сохранить изображение в формате PNG.
                         </p>
+                        <p>Здесь админ проверяет работоспособность сервиса.</p>
 
                         <div class="content-wrapper">
 
                             <div class="content">
                                 <h3>Решение систем дифференциальных уравнений</h3>
-                                <form action="#" th:action="@{/solution}" method="post">
+                                <form action="/admin/home/solve" method="get">
                                     <div class="equation-header"><b> Первое уравнение системы:</b></div>
                                     <div class="equation">x' = <input type="text" value="y" maxlength="50"></div>
 
                                     <div class="equation-header"><b> Второе уравнение системы:</b></div>
-                                    <div class="equation">y' = <input type="text" value="-x" maxlength="50">
-                                    </div>
+                                    <div class="equation">y' = <input type="text" value="-x" maxlength="50"></div>
 
                                     <div style="display: none" class="equation-header"><b> Третье уравнение системы:</b>
                                     </div>
-                                    <div class="equation" style="display: none">z'= <input type="text" maxlength="50">
-                                    </div>
+                                    <div class="equation" style="display: none"><input type="text" maxlength="50"></div>
 
                                     <div style="display: none" class="equation-header"><b> Четвертое уравнение
                                         системы:</b></div>
-                                    <div class="equation" style="display: none">u' = <input type="text" maxlength="50">
-                                    </div>
+                                    <div class="equation" style="display: none"><input type="text" maxlength="50"></div>
 
                                     <p align="center">
                                         <button type="submit" class="btn btn-success">Решить систему уравнений!</button>
                                     </p>
+
+                                    <h1>Ваше решение:</h1>
+
 
                                 </form>
                             </div>
@@ -114,7 +108,6 @@
 
     </div>
 </div>
-
 
 </body>
 </html>
