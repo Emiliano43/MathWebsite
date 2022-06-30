@@ -29,6 +29,7 @@
                 <li><a href="/admin/feedback/editor">Добавить свой отзыв</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="/profile"> Профиль</a></li>
                 <li><a href="/registration"> Регистрация</a></li>
                 <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Войти</a></li>
             </ul>
@@ -59,12 +60,18 @@
 
                             <div class="content">
                                 <h3>Решение систем дифференциальных уравнений</h3>
+                                Начальные условия:
                                 <form action="/admin/home/solve" method="get">
+
+                                    <div>x0&#160;&#160;&#160;= <input type="text"></div>
+                                    <div>y01 = <input type="text"></div>
+                                    <div>y02 = <input type="text"></div>
+
                                     <div class="equation-header"><b> Первое уравнение системы:</b></div>
-                                    <div class="equation">x' = <input type="text" value="y" maxlength="50"></div>
+                                    <div class="equation">y' = <input type="text" maxlength="50"></div>
 
                                     <div class="equation-header"><b> Второе уравнение системы:</b></div>
-                                    <div class="equation">y' = <input type="text" value="-x" maxlength="50"></div>
+                                    <div class="equation">z' = <input type="text" maxlength="50"></div>
 
                                     <div style="display: none" class="equation-header"><b> Третье уравнение системы:</b>
                                     </div>
@@ -77,9 +84,7 @@
                                     <p align="center">
                                         <button type="submit" class="btn btn-success">Решить систему уравнений!</button>
                                     </p>
-
-                                    <h1>Ваше решение:</h1>
-                                </form>
+                                    </form>
                             </div>
 
                             <div class="reference-menu-container">
@@ -92,9 +97,7 @@
                                         <li>
                                             <a>Что такое система уравнений?</a>
                                         </li>
-                                        <li>
-                                            <a>Что такое производная функции?</a>
-                                        </li>
+                                        <li><a href="/theory3">Что такое производная функции?</a></li>
                                         <li>
                                             <a>Методы решения дифференциальных уравнений</a>
                                         </li>

@@ -1,23 +1,14 @@
 package com.example.controllers;
 
-import mathLib.func.ArrayFunc;
-import mathLib.ode.solvers.DerivnFunction;
-import mathLib.ode.solvers.OdeSystemSolver;
-import mathLib.plot.MatlabChart;
-import mathLib.polynom.util.MathUtils;
-import org.jfree.chart.ChartFactory;
+import flanagan.integration.RungeKutta;
+import mathLibrary.func.ArrayFunc;
+import mathLibrary.ode.solvers.DerivnFunction;
+import mathLibrary.ode.solvers.OdeSystemSolver;
+import mathLibrary.plot.MathChart;
+import mathLibrary.polynom.util.MathUtils;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.labels.ItemLabelAnchor;
-import org.jfree.chart.labels.ItemLabelPosition;
-import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
-import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.renderer.category.CategoryItemRenderer;
-import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.ui.TextAnchor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,8 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.http.HttpResponse;
 
 @Controller
 @RequestMapping
@@ -39,43 +28,53 @@ public class MainController {
     @Autowired
     private ReviewService reviewService;
 
-    @RequestMapping(value = "/home")
+    @RequestMapping(path = "/home")
     public String homePage(Model model) {
         return "home";
     }
 
-    @RequestMapping(value = "/feedback")
+    @RequestMapping(path = "/profile")
+    public String profilePage(Model model) {
+        return "profile";
+    }
+
+    @RequestMapping(path = "/theory3")
+    public String theory3Page(Model model) {
+        return "theory3";
+    }
+
+    @RequestMapping(path = "/feedback")
     public String reviewsPage(Model model) {
-        model.addAttribute("reviews",   reviewService.getAll());
+        model.addAttribute("reviews", reviewService.getAll());
         return "reviews";
     }
 
-    @RequestMapping(value = "/feedback/editor/submit", method = RequestMethod.POST)
+    @RequestMapping(path = "/feedback/editor/submit", method = RequestMethod.POST)
     public String submitReview(@ModelAttribute Review review) {
         reviewService.save(review);
         return "redirect:../";
     }
 
-    @RequestMapping(value = "/login")
+    @RequestMapping(path = "/login")
     public String loginPage() {
         return "login";
     }
 
-    @RequestMapping(value = "/solution")
+    @RequestMapping(path = "/solution")
     public String solve(Model model, HttpServletResponse response) throws IOException {
-        DerivnFunction function = (x, y) -> new double[]{y[1], -y[0]};
+        /*DerivnFunction function = (x, y) -> new double[]{y[1], -y[0]};
         double x0 = 0.0;
         double[] y0 = {0.0, 1.0};
 
         OdeSystemSolver odeSystemSolver = new OdeSystemSolver(function, x0, y0);
-        double[] x = MathUtils.linspace(0.0, 20.0, 1000);
+        double[] x = MathUtils.linspace(0, 20.0, 1000);
         double[] y1Exact = ArrayFunc.apply(t -> Math.sin(t), x);
         double[] y2Exact = ArrayFunc.apply(t -> Math.cos(t), x);
-        double[] xEuler = MathUtils.linspace(0.0, 20.0, 100);
+        double[] xEuler = MathUtils.linspace(0, 20.0, 100);
         double[][] yEuler = odeSystemSolver.euler(xEuler);
 
 
-        MatlabChart figure = new MatlabChart();
+        MathChart figure = new MathChart();
         //figure.plot(x, y2Exact, "b");
         figure.plot(xEuler, yEuler[0], "red", 1f, "1st");
         figure.plot(xEuler, yEuler[1], "blue", 1f, "2nd");
@@ -84,26 +83,43 @@ public class MainController {
         figure.setFigLineWidth(1, 1);
         figure.xlabel("x values");
         figure.ylabel("y(x) solution");
-        figure.show(true);
+        figure.show(true);*/
+
+        double pi = Math.PI;
+
+        flanagan.integration.DerivnFunction dfuncs = new flanagan.integration.DerivnFunction() {
+
+            @Override
+            public double[] derivn(double x, double[] yy) {
+                double y = yy[0];
+                double z = yy[1];
+                return new double[]{z, -y};
+            }
+        };
+
+        RungeKutta integrator = new RungeKutta();
+        integrator.setStepSize(1e-4);
+        integrator.setInitialValueOfX(0.0);
+        integrator.setFinalValueOfX(10.0);
+        integrator.setInitialValuesOfY(new double[]{0.0, 1.0});
+
+        double[][] sol = integrator.fourthOrder(dfuncs, 100);
+
+//		integrator.plot() ;
+
+        //MathUtils.show(sol[0]);
+
+        MathChart figure = new MathChart();
+        figure.plot(sol[0], sol[1], "red", 1f, "1st");
+        figure.plot(sol[0], sol[2], "blue", 1f, "2nd");
+        figure.renderPlot();
+        figure.run(true);
+        figure.xlabel("x values");
+        figure.ylabel("y(x) solution");
+        figure.legendON();
+        figure.markerON();
 
         //saveChartAsPNGImage(figure.getChart(), 500, 500, response);
-
-        /*final DefaultCategoryDataset categoryDataset = buildHistoryOfInternetUsersCategoryDataset();
-        final String title = "History of users of the Internet from";
-        final String categoryAxisLabel = "Year";
-        final String valueAxisLabel = "Num. of Users (in millions)";
-        final boolean legend = true;
-        final boolean tooltips = true;
-        final boolean urls = true;
-
-        final JFreeChart lineChart = ChartFactory.createLineChart(title, categoryAxisLabel, valueAxisLabel, categoryDataset, PlotOrientation.VERTICAL, legend, tooltips, urls);
-        final CategoryPlot categoryPlot = (CategoryPlot) lineChart.getPlot();
-        final CategoryItemRenderer categoryItemRenderer = categoryPlot.getRenderer();
-
-
-        final ItemLabelPosition position = new ItemLabelPosition(ItemLabelAnchor.OUTSIDE12, TextAnchor.TOP_LEFT);*/
-
-
         //writeChartAsPNGImage(figure.getChart(), 500, 500, response);
 
 
@@ -122,15 +138,4 @@ public class MainController {
         response.setContentType(MediaType.IMAGE_PNG_VALUE);
         ChartUtilities.saveChartAsPNG(new File("C:\\Users\\enazy\\IdeaProjects\\Diplom\\src\\main\\resources\\static\\images\\plot.png"), chart, width, height);
     }
-
-
-    /*private DefaultCategoryDataset buildHistoryOfInternetUsersCategoryDataset() {
-        final Comparable<String> rowKey = "Num. of Users";
-        final DefaultCategoryDataset categoryDataset = new DefaultCategoryDataset();
-        //statisticsService.getsHistoryOfInternetUsers().forEach((history) -> categoryDataset.setValue(history.getMillionsOfUsers(), rowKey, Integer.valueOf(history.getYear())));
-
-        return categoryDataset;
-
-
-    }*/
 }

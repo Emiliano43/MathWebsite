@@ -3,12 +3,11 @@ package com.example.controllers;
 import com.example.dao.ReviewRepository;
 import com.example.models.Review;
 import com.example.services.ReviewService;
-import com.example.services.UserService;
-import mathLib.func.ArrayFunc;
-import mathLib.ode.solvers.DerivnFunction;
-import mathLib.ode.solvers.OdeSystemSolver;
-import mathLib.plot.MatlabChart;
-import mathLib.polynom.util.MathUtils;
+import mathLibrary.func.ArrayFunc;
+import mathLibrary.ode.solvers.DerivnFunction;
+import mathLibrary.ode.solvers.OdeSystemSolver;
+import mathLibrary.plot.MathChart;
+import mathLibrary.polynom.util.MathUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,7 +69,7 @@ public class AdminController {
         double[] xEuler = MathUtils.linspace(0.0, 20.0, 100);
         double[][] yEuler = odeSystemSolver.euler(xEuler);
 
-        MatlabChart figure = new MatlabChart();
+        MathChart figure = new MathChart();
         //figure.plot(x, y2Exact, "b");
         figure.plot(xEuler, yEuler[0], "red", 1f, "1st");
         figure.plot(xEuler, yEuler[1], "blue", 1f, "2nd");

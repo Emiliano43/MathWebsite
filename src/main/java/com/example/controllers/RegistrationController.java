@@ -1,12 +1,9 @@
 package com.example.controllers;
 
-import com.example.dao.RoleRepository;
 import com.example.dao.UserRepository;
-import com.example.models.Role;
 import com.example.models.User;
 import com.example.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,11 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping
 public class RegistrationController {
 
     @Autowired
@@ -26,9 +21,6 @@ public class RegistrationController {
 
     @Autowired
     UserRepository userRepository;
-
-    @Autowired
-    RoleRepository roleRepository;
 
     @PersistenceContext
     private EntityManager em;
@@ -47,30 +39,14 @@ public class RegistrationController {
             model.addAttribute("registration", user);
             return "registration";
         }
-        if (!user.getPassword().equals(user.getPasswordConfirm())){
-            model.addAttribute("passwordError", "Пароли не совпадают");
-            return "registration";
-        }
+
         if (!userService.saveUser(user)){
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "registration";
         }
 
         userRepository.save(user);
-        return "home";
-    }
-
-    @RequestMapping(path = "/profile")
-    public String getUserInfo(Model model) {
-        User user = userRepository.findByUsername(
-                SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("user", user);
-        for (Role role : user.getRoles()) {
-            if (role.getName().equals("ADMIN")) {
-                model.addAttribute("role", "ADMIN");
-            }
-        }
-        return "profile";
+        return "redirect:/home";
     }
 
     public List<User> usergtList(Long idMin) {

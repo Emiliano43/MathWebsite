@@ -29,6 +29,7 @@
                 <li><a href="/feedback/editor">Добавить свой отзыв</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="/profile"> Профиль</a></li>
                 <li><a href="/registration"> Регистрация</a></li>
                 <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Войти</a></li>
             </ul>
@@ -59,12 +60,18 @@
 
                             <div class="content">
                                 <h3>Решение систем дифференциальных уравнений</h3>
+                                Начальные условия:
                                 <form action="#" th:action="@{/solution}" method="post">
+
+                                    <div>x0&#160;&#160;&#160;= <input type="text"></div>
+                                    <div>y01 = <input type="text"></div>
+                                    <div>y02 = <input type="text"></div>
+
                                     <div class="equation-header"><b> Первое уравнение системы:</b></div>
-                                    <div class="equation">x' = <input type="text" value="y" maxlength="50"></div>
+                                    <div class="equation">x' = <input type="text"  maxlength="50"></div>
 
                                     <div class="equation-header"><b> Второе уравнение системы:</b></div>
-                                    <div class="equation">y' = <input type="text" value="-x" maxlength="50">
+                                    <div class="equation">y' = <input type="text"  maxlength="50">
                                     </div>
 
                                     <div style="display: none" class="equation-header"><b> Третье уравнение системы:</b>
@@ -95,7 +102,7 @@
                                             <a>Что такое система уравнений?</a>
                                         </li>
                                         <li>
-                                            <a>Что такое производная функции?</a>
+                                            <a href="/theory3">Что такое производная функции?</a>
                                         </li>
                                         <li>
                                             <a>Методы решения дифференциальных уравнений</a>
