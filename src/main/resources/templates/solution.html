@@ -24,9 +24,9 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/home">Главная</a></li>
-                <li><a href="/feedback">Отзывы</a></li>
-                <li><a href="/feedback/editor">Добавить свой отзыв</a></li>
+                <li><a href="/admin/home">Главная</a></li>
+                <li><a href="/admin/feedback">Отзывы</a></li>
+                <li><a href="/admin/feedback/editor">Добавить свой отзыв</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/profile"> Профиль</a></li>
@@ -51,9 +51,9 @@
                             C другими моими работами можно ознакомиться на моем <a href="https://github.com/Emiliano43">GitHub</a>.<br/>
                             Этот сайт решает системы обыкновенных дифферениальных уравнений вида:
                         <p><img src="images/system.png" alt="Система уравнений"></p>
-                            Решением этой системы будут m функций. Вам будут представлены графики этих функций и таблица<br/>
+                        Решением этой системы будут m функций. Вам будут представлены графики этих функций и таблица<br/>
                         из точек, по которым они строились.
-                            У вас будет возможность сохранить массив этих точек для MATLAB и языка Python (файл .txt). Также вы сможете сохранить изображение в формате PNG.
+                        У вас будет возможность сохранить массив этих точек для MATLAB и языка Python (файл .txt). Также вы сможете сохранить изображение в формате PNG.
                         </p>
 
                         <div class="content-wrapper">
@@ -61,34 +61,30 @@
                             <div class="content">
                                 <h3>Решение систем дифференциальных уравнений</h3>
                                 Начальные условия:
-                                <form action="#" th:action="@{/solution}" method="post">
+                                <form action="/admin/home/solve" method="get">
 
                                     <div>x0&#160;&#160;&#160;= <input type="text"></div>
                                     <div>y01 = <input type="text"></div>
                                     <div>y02 = <input type="text"></div>
 
                                     <div class="equation-header"><b> Первое уравнение системы:</b></div>
-                                    <div class="equation">x' = <input type="text"  maxlength="50"></div>
+                                    <div class="equation">y' = <input type="text" maxlength="50"></div>
 
                                     <div class="equation-header"><b> Второе уравнение системы:</b></div>
-                                    <div class="equation">y' = <input type="text"  maxlength="50">
-                                    </div>
+                                    <div class="equation">z' = <input type="text" maxlength="50"></div>
 
                                     <div style="display: none" class="equation-header"><b> Третье уравнение системы:</b>
                                     </div>
-                                    <div class="equation" style="display: none">z'= <input type="text" maxlength="50">
-                                    </div>
+                                    <div class="equation" style="display: none"><input type="text" maxlength="50"></div>
 
                                     <div style="display: none" class="equation-header"><b> Четвертое уравнение
                                         системы:</b></div>
-                                    <div class="equation" style="display: none">u' = <input type="text" maxlength="50">
-                                    </div>
+                                    <div class="equation" style="display: none"><input type="text" maxlength="50"></div>
 
                                     <p align="center">
                                         <button type="submit" class="btn btn-success">Решить систему уравнений!</button>
                                     </p>
-
-                                </form>
+                                    </form>
                             </div>
 
                             <div class="reference-menu-container">
@@ -101,9 +97,7 @@
                                         <li>
                                             <a>Что такое система уравнений?</a>
                                         </li>
-                                        <li>
-                                            <a href="/theory3">Что такое производная функции?</a>
-                                        </li>
+                                        <li><a href="/theory3">Что такое производная функции?</a></li>
                                         <li>
                                             <a>Методы решения дифференциальных уравнений</a>
                                         </li>
@@ -121,7 +115,6 @@
 
     </div>
 </div>
-
 
 </body>
 </html>
